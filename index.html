@@ -41,6 +41,7 @@
   padding: 30px 0;/* 수직 두께 */
   padding-right: 250px; /* 원하는 만큼 오른쪽으로 밀기 */
   display: flex;
+
 }
 
 .menu-bar a {
@@ -59,7 +60,8 @@
   display: flex;
   justify-content: center;
   gap: 20px;
-  background-color: rgba(255, 255, 255, 0.95);
+      
+  background-color:  rgb(245, 173, 131);
   padding-left: 100px 0;
   position: absolute;
   width: 100%;
@@ -197,6 +199,7 @@ nav:hover .dropdown-group {
 .slider-container img:hover,
 .bottom-grid img:hover {
   transform: scale(1.05);
+ 
 }
 
 .menu-item {
@@ -249,6 +252,18 @@ nav:hover .dropdown-group {
   /*animation: <이름> <지속시간> <타이밍> <반복횟수> <방향>;*/
 }
 
+.bg-video::-webkit-media-controls {
+  display: none !important;
+}
+
+.bg-video::-moz-media-controls {
+  display: none !important;
+}
+
+.bg-video::-ms-media-controls {
+  display: none !important;
+}
+
 @keyframes dropdownFade {
   from {
     opacity: 0;
@@ -293,6 +308,7 @@ nav:hover .dropdown-group {
 .recruit-popup.show {
   animation: slideUp 0.5s ease-out forwards;
   display: block;
+   color: #573c1e; /*change color of recruit string*/
 }
 
 .recruit-popup.hide {
@@ -323,7 +339,7 @@ nav:hover .dropdown-group {
 .mobile-slide-menu {/* 핸드폰 메뉴  */
  position: fixed;
   top: 100px;     /* 햄버거 버튼 아래에서 시작 */
-  left: 20px;    /* 햄버거 버튼과 같은 위치 */
+  left: 15px;    /* 햄버거 버튼과 같은 위치 */
   width: 200px;
   height: auto;
   max-height: 80vh;
@@ -347,7 +363,7 @@ nav:hover .dropdown-group {
 .mobile-slide-menu.open {
   transform: scale(1);
   opacity: 1;
-  transform: translate(0, 0); /* ← transform 제거 */
+  /* transform: translate(0, 0); ← mobile menu slide function */
 }
 
 .mobile-slide-menu.closing {
@@ -376,6 +392,7 @@ nav:hover .dropdown-group {
   border-radius: 8px;
   z-index: 1000;
   cursor: pointer;
+  
 }
 
  .slider-container {
@@ -570,6 +587,7 @@ nav:hover .dropdown-group {
 .mobile-lisde-menu.open {
   animation: slideDiagonal 0.5s forwards ease;
   pointer-events: auto;
+  
 }
 
     /* 채용정보 팝업 */
@@ -579,11 +597,11 @@ nav:hover .dropdown-group {
   left: 0;
   width: 100vw; /* 가로 꽉 채우기 */
   height: 60vh; /* 세로 60% */
-  background-color: rgba(255, 255, 255, 0.97);
+  background-color: rgba(247, 230, 204, 0.97);
   padding: 25px 40px; /* 좌우 약간 패딩은 유지해도 되고 없애도 됨 */
   box-sizing: border-box;
   border-radius: 10px 10px 0 0;
-  box-shadow: 0 -4px 10px rgba(0,0,0,0.3);
+  box-shadow: 0 -4px 10px rgba(255, 145, 1, 0.3);
   z-index: 50;
   display: none;
   overflow-y: auto;
@@ -625,8 +643,8 @@ nav:hover .dropdown-group {
     }
 
     .cobalt-btn {
-      background-color: #0047ab;
-      color: white;
+      background-color: #ff8410;  /*sign up for button*/
+      color: rgb(255, 190, 51);
       padding: 8px 14px;
       border: none;
       border-radius: 4px;
@@ -638,13 +656,10 @@ nav:hover .dropdown-group {
       background-color: #003a90;
     }
 
-
-
-
 .image-with-caption img {
   width: 300px;
   border-radius: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 2px 8px rgba(206, 75, 75, 0.4);
   transition: transform 0.3s;
 }
 
@@ -713,7 +728,8 @@ nav:hover .dropdown-group {
 
    
     <a href="#" onclick="location.reload()">
-    <img src="https://raw.githubusercontent.com/LJ555-c/image-hosting/main/image5.jpg" 
+    <img src="https://github.com/LJ555-c/image-hosting/raw/main/heart-7704884_960_720.png" 
+    
        alt="로고" 
        style="height: 40px; vertical-align: middle;">
     </a>
@@ -757,7 +773,7 @@ nav:hover .dropdown-group {
 
      <div class="dropdown-section">
            <a href="#" id="recruitSubMenu">채용문의</a>
-           <a href="#" id="recruitSubMenu">채용고객문의</a>
+           <a href="#" id="recruitASK">채용고객문의</a>
       
     </div>
   </div>
@@ -953,16 +969,21 @@ if (recruitImage)
 
 mobileMenuBtn.addEventListener('click', () => {
   mobileSlideMenu.classList.toggle('open');
+
+  //mobileSlideMenu.addEventListener('click', closeRecruitPopup);// this point makes recruite panel close on a whim
+  
 });
 
 mobileCloseBtn.addEventListener('click', () => {
   mobileSlideMenu.classList.remove('open');
-  mobileSlideMenu.classList.add('closing');
+
 
   // 애니메이션 완료 후 클래스 제거
   setTimeout(() => {
     mobileSlideMenu.classList.remove('closing');
+
   }, 500);
+  
 });
 
 
@@ -991,6 +1012,7 @@ recruitMenuMobile.addEventListener('click', (e) => {
   recruitSubMenu.addEventListener('click', (e) => {
     e.preventDefault();
     recruitPopup.style.display = 'block';
+    
   });
 
   // 채용 팝업 닫기
@@ -1075,6 +1097,25 @@ recruitMenuMobile?.addEventListener('click', (e) => {
   openRecruitPopup();
 });
 closeRecruitBtn.addEventListener('click', closeRecruitPopup);
+
+
+$(document).ready(function () {
+  // 햄버거 버튼 클릭 시
+  $('.hamburger-btn').on('click', function () {
+    // 채용 팝업이 열려 있으면 닫는다
+    if ($('.recruit-popup').hasClass('active')) {
+      $('.recruit-popup').removeClass('active');
+    }
+
+    // 여기에 기존 햄버거 메뉴 여는 코드가 있다면 그대로 유지
+    $('.mobile-nav').toggleClass('open');
+  });
+
+  // 팝업 닫기 버튼 클릭 시
+  $('.close-popup').on('click', function () {
+    $('.recruit-popup').removeClass('active');
+  });
+});
 </script>
 
 </body>
