@@ -111,6 +111,7 @@ nav:hover .dropdown-group {
       margin: 0 70px;
       text-decoration: none;
       font-weight: bold;
+      
     }
 
     nav a:hover 
@@ -266,6 +267,39 @@ nav:hover .dropdown-group {
   100% { transform: translateX(20px); }
 }
 
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideDownOut {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+.recruit-popup.show {
+  animation: slideUp 0.5s ease-out forwards;
+  display: block;
+}
+
+.recruit-popup.hide {
+  animation: slideDownOut 0.5s ease-in forwards;
+}
+
+
 .mobile-slide-menu a {
     display: block;
     margin-bottom: 10px;    
@@ -397,6 +431,7 @@ nav:hover .dropdown-group {
     flex-direction: column;
     align-items: left;
     max-width: 90%; /* 필요에 따라 조절 */
+    margin: 0 auto;
   }
 
 
@@ -552,7 +587,7 @@ nav:hover .dropdown-group {
   z-index: 50;
   display: none;
   overflow-y: auto;
-  transform: none; /* 좌우 가운데 맞춤 해제 */
+  /*transform: none;  좌우 가운데 맞춤 해제 */
 }
 
     .recruit-popup .close-btn {
@@ -771,7 +806,7 @@ nav:hover .dropdown-group {
     <div class="caption">
       <h3>채용문의</h3>
       <p>전화번호: 010-9999-0000</p>
-      <p>이메일: shin@example.com</p>
+      <p>이메일: young0504@warmheart.kr</p>
     </div>
   </div>
 </div>
@@ -779,7 +814,7 @@ nav:hover .dropdown-group {
 
   
 
-  <!-- 하단 3x3 그리드 이미지 9개 -->
+  <!-- 하단 3x3 그리드 이미지 9개 
 <div class="bottom-grid">
   <div class="image-with-caption">
     <img src="https://img.pikbest.com/photo/20250717/morning-coffee-on-a-rainy-day_11795880.jpg!bwr800" alt="Bottom 1">
@@ -846,7 +881,7 @@ nav:hover .dropdown-group {
   </div>
 </div>
 
-
+-->
 
 
   <!-- 채용정보 팝업 -->
@@ -912,6 +947,7 @@ if (recruitImage)
 {
   recruitImage.addEventListener('click', () => {
     recruitPopup.style.display = 'block';
+    
   });
 }
 
@@ -936,7 +972,7 @@ const recruitPopup = document.getElementById('recruitPopup');
 
 recruitMenuMobile.addEventListener('click', (e) => {
   e.preventDefault();
-  mobileSlideMenu.classList.remove('open');
+  mobileSlideMenu.classList.toggle('open');
   recruitPopup.style.display = 'block';
 });
 
@@ -1003,6 +1039,42 @@ recruitMenuMobile.addEventListener('click', (e) => {
       }
     });
   }
+
+
+
+// 팝업 열기
+function openRecruitPopup() {
+  recruitPopup.classList.remove('hide');
+  recruitPopup.style.display = 'block';
+  recruitPopup.classList.toggle('show');
+}
+
+// 팝업 닫기
+function closeRecruitPopup() {
+  recruitPopup.classList.remove('show');
+  recruitPopup.classList.add('hide');
+
+  // 애니메이션 끝난 후 display:none 처리
+  recruitPopup.addEventListener('animationend', function handleAnimationEnd() {
+    recruitPopup.style.display = 'none';
+    recruitPopup.removeEventListener('animationend', handleAnimationEnd);
+  });
+}
+
+
+
+// 이벤트 연결
+recruitImage?.addEventListener('click', openRecruitPopup);
+recruitSubMenu?.addEventListener('click', (e) => {
+  e.preventDefault();
+  openRecruitPopup();
+});
+recruitMenuMobile?.addEventListener('click', (e) => {
+  e.preventDefault();
+  mobileSlideMenu.classList.remove('open');
+  openRecruitPopup();
+});
+closeRecruitBtn.addEventListener('click', closeRecruitPopup);
 </script>
 
 </body>
